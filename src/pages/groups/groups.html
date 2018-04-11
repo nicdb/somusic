@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Groups</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="searchGroups(searchTerm)" block></ion-searchbar>
+
+  <ion-list >
+      <ion-item *ngFor="let group of groups">
+        <h2 (click)="onGroup(group)">{{group.title}}</h2>
+        <ion-avatar item-start>
+          <img src="./assets/imgs/group_ph.png">
+        </ion-avatar>
+        <button *ngIf="!group.isMember" (click)="joinGroup(group)" ion-button outline item-end>Join</button>
+        <button *ngIf="!(this.id == group.adminId) && group.isMember" (click)="leaveGroup(group.id)" ion-button color="danger" outline item-end>Leave</button>
+        <button *ngIf="this.id == group.adminId" (click)="deleteGroup(group.id)" ion-button color="danger" outline item-end>Delete</button>
+      </ion-item>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create Group</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="groupForm" (ngSubmit)="newGroup()">
+    <ion-item>
+      <ion-label floating>Title</ion-label>
+      <ion-input formControlName="title" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea formControlName="description" type="text"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button type="submit" block [disabled]="!groupForm.valid">New Group</button>
+    </ion-item>
+  </form>
+</ion-content>

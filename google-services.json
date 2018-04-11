@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "390202316771",
+    "firebase_url": "https://somusicmobilepushnotifications.firebaseio.com",
+    "project_id": "somusicmobilepushnotifications",
+    "storage_bucket": "somusicmobilepushnotifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390202316771:android:3777e5ee0892d8cc",
+        "android_client_info": {
+          "package_name": "com.somusicmobile.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390202316771-sd4gtodujdfbfa21fputlq0eb8a223eh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYxK84S8wYG8xsdmyKbsBbeQxjbolfFb0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item (click)="onProfile()" *ngIf="this.user != null">
+      <ion-avatar item-start>
+        <img src="{{this.user.avatar_big}}">
+      </ion-avatar>
+      {{this.user.realname}}
+      <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon>
+    </button>
+    <button ion-item (click)="newGroup()">New Group <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+    <button ion-item (click)="searchGroup()">Search Group <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+  </ion-list>
+  <ion-list  *ngIf="this.invites.length > 0" >
+    <ion-list-header style="margin-bottom:0;">
+      Invites
+    </ion-list-header>
+    <ion-item *ngFor="let group of this.invites">
+      <h3 (click)="onGroup(group)">{{group.title}}</h3>
+      <ion-avatar item-start>
+        <img src="./assets/imgs/group_ph.png">
+      </ion-avatar>
+      <button (click)="declineInvite(group.id)" ion-button color="danger" outline item-end>Ignore</button>
+      <button (click)="joinGroup(group)" ion-button outline item-end>Join</button>
+    </ion-item>
+  </ion-list>
+  <ion-list  *ngIf="this.adminGroups.length > 0" >
+    <ion-list-header style="margin-bottom:0;">
+      Admin Groups
+    </ion-list-header>
+    <ion-item *ngFor="let group of this.adminGroups">
+      <h3 (click)="onGroup(group)">{{group.title}}</h3>
+      <ion-avatar item-start>
+        <img src="./assets/imgs/group_ph.png">
+      </ion-avatar>
+      <button (click)="presentConfirmDelete(group.id)" ion-button color="danger" outline  item-end>Delete</button>
+    </ion-item>
+  </ion-list>
+  <ion-list  *ngIf="this.joinedGroups.length > 0" >
+    <ion-list-header style="margin-bottom:0;">
+      Your Groups
+    </ion-list-header>
+    <ion-item *ngFor="let group of this.joinedGroups">
+      <h3 (click)="onGroup(group)">{{group.title}}</h3>
+      <ion-avatar item-start>
+        <img src="./assets/imgs/group_ph.png">
+      </ion-avatar>
+      <button (click)="presentConfirmLeave(group.id)" ion-button color="danger" outline item-end>Leave</button>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <button ion-item (click)="logout()">Logout <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list margin-bottom="0">
+    <ion-item>
+      <ion-textarea placeholder="Enter a post" [(ngModel)]="post"></ion-textarea>
+    </ion-item>
+    <ion-item>
+    <button ion-button color="primary" block (click)="onSend()">Send</button>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="this.dataAv; else loading">
+    <div *ngIf="posts.length>0; else noPosts">
+      <div *ngFor="let post of posts" margin-top="0">
+        <post  *ngIf="!(post.realname.indexOf('Deleted') != -1)" [post] = post></post>
+      </div>
+    </div>
+
+    <ng-template #noPosts>
+      <ion-list>
+        <ion-card-header class="h-center">
+          No Posts.
+        </ion-card-header>
+      </ion-list>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <ion-list>
+      <ion-card-header class="h-center">
+        <ion-spinner></ion-spinner>
+      </ion-card-header>
+    </ion-list>
+  </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

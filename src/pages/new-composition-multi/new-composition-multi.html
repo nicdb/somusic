@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>New Assignment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Name</ion-label>
+      <ion-input [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time Signatures</ion-label>
+      <ion-select [(ngModel)]="timeSignature">
+        <ion-option *ngFor="let timeSignature of timeSignatures" [value] = "timeSignature">{{timeSignature}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Key Signatures</ion-label>
+      <ion-select [(ngModel)]="keySignature">
+        <ion-option *ngFor="let keySignature of keySignatures" [value] = "keySignature">{{keySignature}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Instruments</ion-label>
+        <ion-select *ngIf="instruments" [(ngModel)]="instrumentSelected">
+          <ion-option *ngFor="let instrument of instruments" [value] = "instrument">{{instrument.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <button padding ion-button block [disabled]="!instrumentSelected" (click)="addInstrument()">Add Instrument</button>
+      </ion-item>
+      <span *ngIf="instrumentsUsed.length > 0">
+        <ion-item-sliding  *ngFor="let instrument of instrumentsUsed">
+          <ion-item>
+            <ion-label>{{instrument.labelName}}</ion-label>
+            <ion-select [(ngModel)]="instrument.userSelected" (ngModelChange)="editUser(instrument)">
+              <ion-option *ngFor="let user of users" [value] = user>{{user.realname}}</ion-option>
+            </ion-select>
+            <button ion-button clear item-end><ion-icon name="more" color="light"></ion-icon></button>
+          </ion-item>
+          <ion-item-options>
+            <button ion-button color="danger" (click)="removeInstrument(instrument)">
+              <ion-icon name="close"></ion-icon>
+              Remove
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+    </span>
+    <ion-item>
+      <button ion-button block [disabled]="(this.instrumentsUsed.length == 0) || name == ''" (click)="commit()">Commit</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Compositions</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item (click)="newComposition()">New Composition <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+  </ion-list>
+    <div *ngFor="let composition of this.compositions">
+      <ion-card  *ngIf="composition.name != '' " style="margin-left:0px; width:100%; padding: 5px;">
+        <ion-card-content>
+          <ion-card-title>
+            {{composition.name}}
+          </ion-card-title>
+        </ion-card-content>
+        <div style="overflow-x: scroll;">
+          <canvas [renderer]="composition" height="300" width="300" (click) = "onEditor(composition)"></canvas>
+        </div>
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small icon-start (click)="presentConfirm(composition.id)">
+              Remove
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small icon-start (click)="shareComposition(composition.id)">
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+</ion-content>

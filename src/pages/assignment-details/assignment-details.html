@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{assignment.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="assignment.isMultiUser==0; else multiUser">
+    <div *ngIf="isAdmin && executions.length > 0; else noCommits">
+      <ion-item *ngFor="let execution of this.executions"  text-wrap>
+          <h2 (click)="onExecution(execution)" text-wrap>{{execution.realname}}</h2>
+          <p>{{execution.comment}}</p>
+          <button ion-button clear (click)="onExecution(execution)" item-end >View</button>
+          <button ion-button clear (click)="onComment(execution)"   item-end >Details</button>
+      </ion-item>
+    </div>
+    <ion-item *ngIf="assignment.close == 0" >
+      <button ion-button block (click)="closeAssignment()">Close Assignment</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="removeAssignment()">Delete Assignment</button>
+    </ion-item>
+    <ng-template #noCommits>
+      <ion-list>
+        <ion-card-header class="h-center">
+          No Commits.
+        </ion-card-header>
+      </ion-list>
+    </ng-template>
+  </div>
+  <ng-template #multiUser>
+    <ion-item *ngIf="assignment.close == 0" >
+      <button ion-button block (click)="closeAssignment()">Close Assignment</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="removeAssignment()">Delete Assignment</button>
+    </ion-item>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,20 @@
+<div *ngIf="isAdmin; else user">
+<ion-list  *ngFor="let assignment of this.assignments">
+  <ion-item *ngIf="(assignment.compositionId != null)">
+    <h3     *ngIf="(assignment.close == 0)" (click)="onAssignment(assignment)" >{{assignment.name}}</h3>
+    <h3     *ngIf="(assignment.close == 1)" (click)="onAssignment(assignment)" style="color:#C62828;">[Closed] {{assignment.name}}</h3>
+    <button *ngIf="assignment.isMultiUser==1"  ion-button (click)="onDetails(assignment)" clear item-end>Edit</button>
+    <button *ngIf="assignment.isMultiUser==0" ion-button (click)="onDetails(assignment)" clear item-end>Details</button>
+  </ion-item>
+</ion-list>
+</div>
+
+<ng-template #user>
+  <ion-list *ngFor="let assignment of this.assignments">
+    <ion-item *ngIf="(assignment.close == 0) && (assignment.compositionId != null)">
+      <h3     *ngIf="assignment.isMultiUser==1" (click)="onAssignment(assignment)">{{assignment.name}}</h3>
+      <h3     *ngIf="assignment.isMultiUser==0">{{assignment.name}}</h3>
+      <button *ngIf="assignment.isMultiUser==0" ion-button (click)="onEdit(assignment)" clear item-end>Edit</button>
+    </ion-item>
+  </ion-list>
+</ng-template>

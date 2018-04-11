@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Invite</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="this.dataAv; else loading">
+    <div *ngIf="users.length>0;else noInvites">
+      <div *ngFor="let user of users">
+        <user [user] = user [isInvite] = true [groupId] = groupId></user>
+      </div>
+    </div>
+    <ng-template #noInvites>
+      <ion-list>
+        <ion-card-header class="h-center">
+          There are no users left.
+        </ion-card-header>
+      </ion-list>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <ion-list>
+      <ion-card-header class="h-center">
+        <ion-spinner></ion-spinner>
+      </ion-card-header>
+    </ion-list>
+  </ng-template>
+</ion-content>

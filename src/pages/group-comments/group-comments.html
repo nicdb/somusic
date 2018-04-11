@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{post.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="no-padding">
+  <group-post [post] = post [groupId] = groupId></group-post>
+  <ion-list margin-bottom="0">
+    <ion-item>
+      <ion-textarea placeholder="Enter a comment" [(ngModel)]="comment"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <button ion-button color="primary" block (click)="onSend()">Send</button>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="comments">
+    <div *ngFor="let comment of comments">
+      <group-comment [comment] = comment [groupId] = groupId></group-comment>
+    </div>
+  </ion-list>
+</ion-content>

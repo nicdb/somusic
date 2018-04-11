@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Notifications</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="notifications.length>0">
+      <ion-item *ngFor="let notification of notifications" text-wrap>
+        <ion-avatar item-start>
+          <img src="{{notification.userAvatar}}">
+        </ion-avatar>
+        <p >{{notification.msg}}</p>
+      </ion-item>
+  </ion-list>
+  <ion-card-header *ngIf="notificationsViewed.length>0" class="h-bold">
+    Read
+  </ion-card-header>
+  <ion-list *ngIf="notificationsViewed.length>0">
+    <ion-item *ngFor="let notification of notificationsViewed" text-wrap>
+      <ion-avatar item-start>
+        <img src="{{notification.userAvatar}}">
+      </ion-avatar>
+      <p >{{notification.msg}}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="notifications.length==0 && notificationsViewed.length==0">
+    <ion-card-header class="h-center">
+      No Notifications.
+    </ion-card-header>
+  </ion-list>
+</ion-content>

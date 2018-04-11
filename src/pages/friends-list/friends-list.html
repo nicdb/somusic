@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Friends List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="this.dataAv; else loading">
+    <div *ngIf="users.length>0;else noFriends">
+      <div *ngFor="let user of this.users">
+        <user [user]="user"></user>
+      </div>
+    </div>
+    <ng-template #noFriends>
+      <ion-list>
+        <ion-card-header class="h-center">
+          No friends.
+        </ion-card-header>
+      </ion-list>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <ion-list>
+      <ion-card-header class="h-center">
+        <ion-spinner></ion-spinner>
+      </ion-card-header>
+    </ion-list>
+  </ng-template>
+</ion-content>

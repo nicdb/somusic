@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="composition.name != ''">Editor - {{composition.name}}</ion-title>
+    <ion-title *ngIf="composition.name == ''">Editor - {{assignment.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="background-color: white;">
+  <ion-grid>
+    <ion-row>
+    <ion-col>
+      <fieldset>
+        <legend style="font-weight: bold; font-family: Roboto, 'Helvetica Neue', sans-serif">Duration</legend>
+        <span *ngFor="let key of notesKeys">
+          <label>
+          <input type="radio" name="durationSelected" [value]="key" (click)="changeNoteDuration(key)" [(ngModel)]="durationSelected"/>
+            <img [src]="notes.get(key)"/>
+          </label>
+        </span>
+        <br>
+        <span *ngFor="let key of restsKeys">
+          <label>
+          <input type="radio" name="durationSelected" [value]="key" (click)="changeNoteDuration(key)" [(ngModel)]="durationSelected"/>
+            <img [src]="rests.get(key)"/>
+          </label>
+        </span>
+      </fieldset>
+    </ion-col>
+    <ion-col>
+      <fieldset >
+        <legend style="font-weight: bold; font-family: Roboto, 'Helvetica Neue', sans-serif">Accidentals</legend>
+        <span *ngFor="let key of accidentalsKeys">
+        <label>
+          <input type="radio" name="accidentalSelected" [value]="key" (click)="accidentalUpdate(key)" [(ngModel)]="accidentalSelected"/>
+          <img [src]="accidentals.get(key)"/>
+        </label>
+        </span>
+      </fieldset>
+    </ion-col>
+    <ion-col>
+      <button ion-button outline (click)="delNotes($event)">Delete</button>
+      <button ion-button outline (click)="tie($event)">Tie</button>
+      <button ion-button outline (click)="dotsUpdate(1)">Dot</button>
+      <button ion-button outline (click)="dotsUpdate(2)">DoubleDot</button>
+
+      <button ion-button outline (click)="moveNotes(1)"><ion-icon name="arrow-round-up"></ion-icon></button>
+      <button ion-button outline (click)="moveNotes(-1)"><ion-icon name="arrow-round-down"></ion-icon></button>
+    </ion-col>
+      </ion-row>
+  </ion-grid>
+
+  <!--<fieldset hidden>
+    <legend>Voices</legend>
+    <span *ngFor="let key of voiceKeys">
+      <input type="radio" name="voiceSelected" value="key" [(ngModel)]="voiceSelected"/>
+    </span>
+  </fieldset>-->
+
+  <div id="scoreDiv" style="overflow-x: scroll;" swipeAll
+       (swipeup)="swipeUp($event)"
+       (swipedown)="swipeDown($event)">
+    <canvas #score width="300" height="300" (click)="processClick($event)"></canvas>
+  </div>
+  <br>
+  <button ion-button  (click)="addComposition()" style="float: right; margin-right: 40px">Add</button>
+
+  <ng-template #noData>
+    No Data Available
+  </ng-template>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{group.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content *ngIf="this.id">
+  <ion-card style="margin-left:0px; width:100%; padding: 5px;" *ngIf="group.isMember">
+    <ion-card-header class="h-bold">
+      Assignments
+    </ion-card-header>
+    <assignment [isAdmin]=this.isAdmin [userId]=this.id [groupId]=this.group.id></assignment>
+    <div padding *ngIf="isAdmin">
+      <button ion-button block (click)="newAssignment()">New Assignment</button>
+    </div>
+  </ion-card>
+
+
+  <ion-list>
+    <button ion-item (click)="users()">Members <ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+    <button *ngIf="isAdmin" ion-item (click)="invites()" >Invite<ion-icon item-end name="ios-arrow-forward" color="light"></ion-icon></button>
+  </ion-list>
+
+  <ion-card *ngIf="group.isMember; else join" style="margin-left:0px; width:100%; padding: 5px;">
+    <ion-item>
+      <ion-textarea placeholder="Enter a post" [(ngModel)]="post"></ion-textarea>
+    </ion-item>
+    <div padding>
+      <button ion-button color="primary" block (click)="onSend()">Send</button>
+    </div>
+  </ion-card>
+
+  <ng-template #join>
+    <ion-list padding>
+      <button ion-button color="primary" block  (click)="joinGroup()">Join</button>
+    </ion-list>
+  </ng-template>
+  <div *ngIf="this.dataAv; else loading">
+    <div *ngIf="posts.length>0; else noPosts">
+      <ion-card-header class="h-bold">
+        Posts
+      </ion-card-header>
+      <div *ngFor="let post of this.posts">
+        <group-post  *ngIf="!(post.realname.indexOf('Deleted') != -1)" [post] = post [groupId] = group.id ></group-post>
+      </div>
+    </div>
+
+    <ng-template #noPosts>
+      <ion-list>
+        <ion-card-header class="h-center">
+          No Posts.
+        </ion-card-header>
+      </ion-list>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <ion-list>
+      <ion-card-header class="h-center">
+        <ion-spinner></ion-spinner>
+      </ion-card-header>
+    </ion-list>
+  </ng-template>
+</ion-content>

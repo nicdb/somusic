@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Comment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item text-wrap>
+      <ion-label>Execution creation time</ion-label>
+      <p item-end>{{execution.timestamp_c}}</p>
+    </ion-item>
+      <ion-item text-wrap>
+        <ion-label>Execution last modification time</ion-label>
+        <p item-end>{{execution.timestamp_m}}</p>
+      </ion-item>
+    <ion-item text-wrap>
+      <ion-label fixed>Comment</ion-label>
+      <ion-textarea [(ngModel)]="comment">{{execution.comment}}</ion-textarea>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="saveComment()" [disabled]="comment ==''"> Comment </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

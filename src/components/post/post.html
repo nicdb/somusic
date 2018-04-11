@@ -1,0 +1,52 @@
+<div *ngIf="data" class="no-padding">
+  <ion-card style="margin-left:0px; width:100%; padding: 5px;">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{user.avatar}}">
+      </ion-avatar>
+      <h2 (click)="onUser()">{{post.realname}}</h2>
+      <p>{{post.timestamp}}</p>
+      <button *ngIf="isUser" ion-button clear item-end (click)="onPost()"><ion-icon name="more" color="light"></ion-icon></button>
+    </ion-item>
+
+    <div *ngIf="composition && composition.instrumentsUsed" style="overflow-x: scroll;">
+      <canvas [renderer]="this.composition" height="50" width="100" (click) = "onEditor(composition)"></canvas>
+    </div>
+
+    <ion-card-content style="margin-bottom: 0px">
+      <p>{{post.status}}</p>
+      <hr style="margin-top: 30px">
+      <h6 *ngIf="likes.length >0" style=" color:gray;"><span style="font-weight: bold">Likes</span> {{likes.length}}</h6>
+      <h6 *ngIf="likes.length >0" style=" color:gray;">
+        <span *ngFor="let like of likes.slice(0, 2); let lst = last; ">
+          <span *ngIf="!lst" (click)="onLike(like.userId)">
+            {{like.realname}} and
+          </span>
+          <span *ngIf="lst" (click)="onLike(like.userId)">
+            {{like.realname}}
+          </span>
+          <span *ngIf="likes>3" (click)="onAllLikes()">
+            and {{likes.length-3}} others.
+          </span>
+        </span>
+      </h6>
+    </ion-card-content>
+
+    <ion-row style="margin-top:-10px">
+      <ion-col>
+        <button ion-button icon-left outline *ngIf="this.liked" (click)="dislike()" >
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Like</div>
+        </button>
+        <button ion-button icon-left outline clear *ngIf="!this.liked" (click)="like()" color="light">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Like</div>
+        </button>
+      </ion-col>
+        <button ion-button icon-left item-end clear (click)="openComments()">
+          <ion-icon name="text"></ion-icon>
+          <div>Comments</div>
+        </button>
+    </ion-row>
+  </ion-card>
+</div>

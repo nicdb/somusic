@@ -1,0 +1,10 @@
+<ion-item *ngIf="this.datav">
+  <ion-avatar item-start>
+    <img src="{{this.user.avatar}}">
+  </ion-avatar>
+  <h2 (click)="onUser(user)">{{this.user.realname}}</h2>
+
+  <button *ngIf="user.id != this.id && !isInvite && !isUser" ion-button clear item-end (click)="manageFriend()">{{this.buttonString}}</button>
+  <button *ngIf="isInvite && !isUser" ion-button clear item-end (click)="invite()">Invite</button>
+
+</ion-item>

@@ -1,0 +1,7 @@
+<ion-tabs [color]="isAndroid ? 'primary': 'royal'">
+  <ion-tab [root]="tabHome"           tabIcon="home">           </ion-tab>
+  <ion-tab [root]="tabCompositions"   tabIcon="musical-notes">  </ion-tab>
+  <ion-tab [root]="tabFriends"        tabIcon="person"          tabBadge="{{this.lengthRequests > 0 ? this.lengthRequests : null}}" tabBadgeStyle="danger"></ion-tab>
+  <ion-tab [root]="tabNotifications"  tabIcon="notifications"   tabBadge="{{this.length > 0 ? this.length : null}}"                 tabBadgeStyle="danger"></ion-tab>
+  <ion-tab [root]="tabSettings"       tabIcon="menu"            tabBadge="{{this.lengthInvites > 0 ? this.lengthInvites : null}}"   tabBadgeStyle="danger"></ion-tab>
+</ion-tabs>

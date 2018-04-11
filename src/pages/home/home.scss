@@ -1,0 +1,12 @@
+page-home {
+  .no-scroll .scroll-content{
+    overflow: hidden;
+  }
+  ::-webkit-scrollbar{
+    display:none;
+  }
+}
+
+::-webkit-scrollbar{
+  display:none;
+}
